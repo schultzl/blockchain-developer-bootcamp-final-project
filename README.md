@@ -1,4 +1,5 @@
-# blockchain-developer-bootcamp-final-project: Musical instruments rental
+## blockchain-developer-bootcamp-final-project: 
+# Musical instruments rental
 
 While many people have a dusty guitar, saxophone, or other instruments lying around in their homes, others would like to rent this very same instruments for a while - maybe to refresh their skills, to get a simple idea if they like the instrument at all... or simply as a different way to use their time for a while. The musical instruments rental service is ideal for that. ;-)
 
