@@ -1,0 +1,34 @@
+// Add music instrument
+function addInstrument(string instrumentType, string instrumentModel, uint rentPrice, uint minRentPeriod, uint maxRentPeriod) {
+
+ }
+
+// Add music instrument leaser
+function addInstrumentLeaser(uint instrumentId) {
+
+}
+
+// Rent instrument
+function rentInstrument(uint instrumentId) {
+
+}
+
+// Check if instrument is available
+modifier isInstrumentAvailable(uint instrumentId) {
+
+};
+
+// Check if instrument leaser has selected shipment method
+modifier shipmentMethod(string shipment) {
+
+};
+
+// Log when new instrument is added
+event LogInstrumentAdded(uint indexed instrument, uint indexed rentPrice, uint minRentPeriod, uint maxRentPeriod);
+
+// Log when instrument has been rented
+event LogRented(uint instrumentId);
+
+// Log when instrument has been returned
+event LogReturned(uint instrumentId);
+
