@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Simple Dapp</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
+
+</head>
+
+<body>
+    <h1>Instrument Rental</h1>
+
+    <!-- Detect MetaMask -->
+    <h2 id="mm-detected"></h2>
+    <!-- Check if MetaMask Wallet is already connected -->
+    <h3 id="mm-connected"></h3>
+    <!-- If not, connect to MetaMask Wallet -->
+    <button id="mm-connect">Connect to MetaMask</button>
+    <!-- Display current address <p> or </p> -->
+    <p> </p>
+    <button id="mm-show">Show connected account</button>
+    <div id="mm-current-account"></div>
+
+
+    <!-- Provide an input to change the contract text value 
+    <div>
+        <input id="ss-input-box" type="number" placeholder="Provide input" />
+    </div>
+    <button id="ss-input-button">Submit Value</button>
+
+    Read input from contract 
+    <div>
+        <button id="ss-get-value">Get Simple Storage value</button>
+    </div>
+    <div id="ss-display-value">Current Simple Storage Value: </div> -->
+
+    <div class="wrapper">
+        <div class="box">
+            <div id="guitarImg"></div>
+            <div id=overlay0>
+                <p id="item0Description"></p>
+                <label> Shipping
+                    <select id="shipmethod-box0">
+                        <option value="2" selected>None</option>
+                        <option value="0">Standard</option>
+                        <option value="1">Premium</option>
+                    </select>
+                </label>
+                <div>
+                    <input id="rentperiod-box0" type="number" placeholder="Rental period (days)" />
+                </div>
+                <!-- <button id=rent-input-button0>rent this!</button> -->
+                <div><button id="subclass_rentbutton0" onclick="rentItem('0')">rent this!</button></div>
+            </div>
+            <p id="leaserNr0"></p>
+            <div><button id="subclass_returnbutton0" onclick="returnItem('0')">return</button></div>
+        </div>
+        <div class="box">
+            <div id="pianoImg"></div>
+            <div id=overlay3>
+                <p id="item3Description"></p>
+                <label> Shipping
+                    <select id="shipmethod-box3">
+                        <option value="2" selected>None</option>
+                        <option value="0">Standard</option>
+                        <option value="1">Premium</option>
+                    </select>
+                </label>
+                <div>
+                    <input id="rentperiod-box3" type="number" placeholder="Rental period (days)" />
+                </div>
+                <div><button id="subclass_rentbutton3" onclick="rentItem('3')">rent this!</button></div>
+            </div>
+            <p id="leaserNr3"></p>
+            <div><button id="subclass_returnbutton3" onclick="returnItem('3')">return</button></div>
+        </div>
+        <div class="box">
+            <div id="saxophoneImg"></div>
+            <div id=overlay2>
+                <p id="item2Description"></p>
+                <label> Shipping
+                    <select id="shipmethod-box2">
+                        <option value="2" selected>None</option>
+                        <option value="0">Standard</option>
+                        <option value="1">Premium</option>
+                    </select>
+                </label>
+                <div>
+                    <input id="rentperiod-box2" type="number" placeholder="Rental period (days)" />
+                </div>
+                <div><button id="subclass_rentbutton2" onclick="rentItem('2')">rent this!</button></div>
+            </div>
+            <p id="leaserNr2"></p>
+            <div><button id="subclass_returnbutton2" onclick="returnItem('2')">return</button></div>
+        </div>
+    </div>
+</body>
+
+
+
+<!-- Had trouble and had to move the script down! -->
+<script src="dapp.js"></script>
+
+
+</html>
