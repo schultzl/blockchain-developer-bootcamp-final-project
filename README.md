@@ -51,6 +51,8 @@ Note:
 1. If you choose to redeploy this contract, you need to create an .env file and add your infura key (INFURA_API_KEY) and mnemonic (MNEMONIC) to it. 
 
 Alternatively, you can deploy it locally (to dev). In this case, the contract address needs to be updated in file dapp.js (variable `ssAddress`)
+
+
 2. To run the frontend locally, it is recommended to use a live server (Live Server, "Ritwick Dey", v5.6.1)
 
 - In VS code, right-click on the index.html file --> "Open with Live Server"
