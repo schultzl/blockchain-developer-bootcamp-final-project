@@ -48,10 +48,7 @@ Note:
 ### Run the frontend locally
 
 Note: 
-1. If you choose to redeploy this contract, you need to create an .env file and add your infura key (INFURA_API_KEY) and mnemonic (MNEMONIC) to it. 
-
-Alternatively, you can deploy it locally (to dev). In this case, the contract address needs to be updated in file dapp.js (variable `ssAddress`)
-
+1. If you choose to redeploy this contract, you need to create an .env file and add your infura key (INFURA_API_KEY) and mnemonic (MNEMONIC) to it. Alternatively, you can deploy it locally (to dev). In this case, the contract address needs to be updated in file dapp.js (variable `ssAddress`)
 
 2. To run the frontend locally, it is recommended to use a live server (Live Server, "Ritwick Dey", v5.6.1)
 
@@ -77,10 +74,13 @@ Alternatively, you can deploy it locally (to dev). In this case, the contract ad
 - truffle console
 - let instance = await InstrumentRental.deployed()
 - Use functions, e.g.
+
     ... to add an instrument:
-    instance.addInstrument("flute", "XXXXX", "https://pictureofaflute.jpg", web3.utils.toWei('0.003'), 3, 100)
+    
+    instance.addInstrument("flute", "XXXXX", "ht<span>tps://</span>pictureofaflute.jpg", web3.utils.toWei('0.003'), 3, 100)
 
     ... to fetch an instrument that has been added to the contract
+    
     instance.fetchItem(0)
 
 
