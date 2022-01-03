@@ -1,5 +1,5 @@
 // contract address on Rinkeby:
-const ssAddress = '0x55f23333DCEfBff5A36F0Ba5EE0E1EE91A84ee04'
+const ssAddress = '0x04bC2Dd8B33a2015dC604BbE901a845Ebb19e11b'
 
 // add contract ABI from Remix:
 
@@ -80,6 +80,25 @@ const ssABI = [
         "type": "event"
     },
     {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "previousOwner",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
+    },
+    {
         "inputs": [],
         "name": "idCount",
         "outputs": [
@@ -98,7 +117,7 @@ const ssABI = [
         "name": "owner",
         "outputs": [
             {
-                "internalType": "address payable",
+                "internalType": "address",
                 "name": "",
                 "type": "address"
             }
@@ -106,6 +125,26 @@ const ssABI = [
         "stateMutability": "view",
         "type": "function",
         "constant": true
+    },
+    {
+        "inputs": [],
+        "name": "renounceOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "transferOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
     },
     {
         "inputs": [
@@ -255,6 +294,11 @@ const ssABI = [
                 "internalType": "enum InstrumentRental.RentingStatus",
                 "name": "status",
                 "type": "uint8"
+            },
+            {
+                "internalType": "string",
+                "name": "imgUrl",
+                "type": "string"
             }
         ],
         "stateMutability": "view",
@@ -286,9 +330,10 @@ async function getValues(indice) {
     item_leaser = item[5].toString() // 
     item_owner = item[6].toString() // 
     item_rentstatus = rentingStatus[item[8].toString()] // 
+    item_imgUrl = item[9].toString() // 
     item_desc = '<b>' + item_name.toUpperCase() + '</b><br><br>'
         + `Period (days): ${item_minrent} - ${item_maxrent} <br>`
-        + `Price (WEI): ${item_price}<br>`
+        + `Price (ETH): ${(item_price * 1e-18).toFixed(4)}<br>`
 
     var statusText = "___";
 
@@ -303,7 +348,7 @@ async function getValues(indice) {
     } else {
         rentObj.disabled = false
     }
-    return [item_minrent, item_rentstatus, item_desc, statusText];
+    return [item_minrent, item_rentstatus, item_desc, statusText, item_imgUrl];
 }
 
 
@@ -485,15 +530,15 @@ const initialiseFrontEnd = async function () {
         })
     }
 
-    // Guitar
+    // Piano
+    const [item0_minrent, item0_rentstatus, item0_description, item0_statusText, item0_imgUrl] = await getValues(0);
+    [item0_desc_cont, backgroundColor0, opacity0] = defineOverlayStyle(item0_rentstatus)
 
     var imgGuitar = document.createElement("img");
-    imgGuitar.src = "https://thumbs.dreamstime.com/b/funny-classical-guitar-cartoon-style-vector-cute-185881190.jpg"
+    imgGuitar.src = item0_imgUrl
+    console.log(item0_imgUrl)
     var srcGuitar = document.getElementById("guitarImg");
     srcGuitar.appendChild(imgGuitar);
-
-    const [item0_minrent, item0_rentstatus, item0_description, item0_statusText] = await getValues(0);
-    [item0_desc_cont, backgroundColor0, opacity0] = defineOverlayStyle(item0_rentstatus)
 
     const item0_desc = document.getElementById('item0Description')
     item0_desc.innerHTML = item0_description + item0_desc_cont
@@ -502,32 +547,32 @@ const initialiseFrontEnd = async function () {
     document.getElementById("overlay0").style.opacity = opacity0
     document.getElementById("leaserNr0").innerHTML = item0_statusText
 
-    // Piano
+    // Guitar
+
+    const [item3_minrent, item3_rentstatus, item3_description, item3_statusText, item3_imgUrl] = await getValues(1); // [item3_minrent, item3_rentstatus, item3_description]
+    [item3_desc_cont, backgroundColor3, opacity3] = defineOverlayStyle(item3_rentstatus)
 
     var imgPiano = document.createElement("img");
-    imgPiano.src = "https://cdn.w600.comps.canstockphoto.at/piano-cartoon-hand-gezeichnet-bild-clipart-vektor_csp51093457.jpg"
+    imgPiano.src = item3_imgUrl
     var srcPiano = document.getElementById("pianoImg");
     srcPiano.appendChild(imgPiano);
 
-    const [item3_minrent, item3_rentstatus, item3_description, item3_statusText] = await getValues(3); // [item3_minrent, item3_rentstatus, item3_description]
-    [item3_desc_cont, backgroundColor3, opacity3] = defineOverlayStyle(item3_rentstatus)
-
-    const item3_desc = document.getElementById('item3Description')
+    const item3_desc = document.getElementById('item1Description')
     item3_desc.innerHTML = item3_description + item3_desc_cont
 
-    document.getElementById("overlay3").style.backgroundColor = backgroundColor3
-    document.getElementById("overlay3").style.opacity = opacity3
-    document.getElementById("leaserNr3").innerHTML = item3_statusText
+    document.getElementById("overlay1").style.backgroundColor = backgroundColor3
+    document.getElementById("overlay1").style.opacity = opacity3
+    document.getElementById("leaserNr1").innerHTML = item3_statusText
 
     // Saxophone
 
+    const [item2_minrent, item2_rentstatus, item2_description, item2_statusText, item2_imgUrl] = await getValues(2);
+    [item2_desc_cont, backgroundColor2, opacity2] = defineOverlayStyle(item2_rentstatus)
+
     var img = document.createElement("img");
-    img.src = "https://thumbs.dreamstime.com/b/funny-cute-saxophone-side-view-cartoon-style-vector-funny-cute-saxophone-side-view-cartoon-style-gold-185881672.jpg"
+    img.src = item2_imgUrl
     var src = document.getElementById("saxophoneImg");
     src.appendChild(img);
-
-    const [item2_minrent, item2_rentstatus, item2_description, item2_statusText] = await getValues(2);
-    [item2_desc_cont, backgroundColor2, opacity2] = defineOverlayStyle(item2_rentstatus)
 
     const item2_desc = document.getElementById('item2Description')
     item2_desc.innerHTML = item2_description + item2_desc_cont

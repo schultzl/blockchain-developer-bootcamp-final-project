@@ -1,17 +1,20 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.6.0 <0.9.0;
+pragma solidity 0.8.0;
 
 /// @title Smart contract to enable music instrumental leasing
 /// @author Larissa Schultze
 /// @notice Allows a user to lease music instruments upon selection of information of rental period and shipment method
 /// @notice This contract is part of the final project needed for certification of the Blockchain Developer Bootcamp 2021 (Consensys Academy)
 
-contract InstrumentRental {
+/// @notice use Ownable to satisfy project requirement "Inherits from at least one library or interface"
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract InstrumentRental is Ownable {
     uint256 public idCount = 0;
-    address payable public owner;
+    /// obsolete address payable public owner;
 
     /// @notice Information about the music instrument listed for lease
-    /// @param instrumentType can be 'guitar, 'piano, or other
+    /// @param instrumentType can be 'guitar', 'piano', or other
     /// @param minRentPeriod and maxRentPeriod is given in days
     /// @param rentPrice (for KISS purposes) is valid for the total number of days between minRentPeriod and maxRentPeriod. This is not ideal though.
     struct Instrument {
@@ -44,11 +47,14 @@ contract InstrumentRental {
 
     /// @notice Modifiers block
 
-    /// @notice Check if the person calling is the owner
+    /**
+    Obsolete 
+    notice Check if the person calling is the owner
     modifier isOwner() {
         require(msg.sender == owner, "You are not the owner");
         _;
     }
+    */
 
     /// @notice Check if instrument is available
     modifier isInstrumentAvailable(uint256 _instrumentId) {
@@ -132,9 +138,7 @@ contract InstrumentRental {
 
     /// @notice Functions block
 
-    constructor() {
-        owner = payable(msg.sender);
-    }
+    constructor() {}
 
     /// @notice Adds music instrument into contract state
     /// @param _instrumentType can be 'guitar, 'piano, or other
@@ -147,7 +151,7 @@ contract InstrumentRental {
         uint256 _rentPrice,
         uint256 _minRentPeriod,
         uint256 _maxRentPeriod
-    ) public isOwner returns (bool) {
+    ) public onlyOwner returns (bool) {
         instruments[idCount] = Instrument({
             instrumentType: _instrumentType,
             instrumentModel: _instrumentModel,
@@ -156,7 +160,7 @@ contract InstrumentRental {
             maxRentPeriod: _maxRentPeriod,
             imgUrl: _imgUrl,
             leaser: payable(address(0)),
-            owner: payable(msg.sender),
+            owner: payable(owner()),
             shipment: ShipmentMethod.NotSelected,
             status: RentingStatus.Available
         });
@@ -218,7 +222,7 @@ contract InstrumentRental {
         verifyCaller(instruments[_instrumentId].leaser)
         isInstrumentRented(_instrumentId)
     {
-        instruments[_instrumentId].leaser = owner;
+        instruments[_instrumentId].leaser = payable(address(0));
         instruments[_instrumentId].status = RentingStatus.Available;
         instruments[_instrumentId].shipment = ShipmentMethod.NotSelected;
         emit LogReturned(_instrumentId);
@@ -237,7 +241,8 @@ contract InstrumentRental {
             address leaser,
             address ownerFI,
             ShipmentMethod shipment,
-            RentingStatus status
+            RentingStatus status,
+            string memory imgUrl
         )
     {
         instrumentType = instruments[_instrumentId].instrumentType;
@@ -248,6 +253,8 @@ contract InstrumentRental {
         ownerFI = instruments[_instrumentId].owner;
         shipment = instruments[_instrumentId].shipment;
         status = instruments[_instrumentId].status;
+        imgUrl = instruments[_instrumentId].imgUrl;
+
         return (
             instrumentId,
             instrumentType,
@@ -257,7 +264,8 @@ contract InstrumentRental {
             leaser,
             ownerFI,
             shipment,
-            status
+            status,
+            imgUrl
         );
     }
 }
