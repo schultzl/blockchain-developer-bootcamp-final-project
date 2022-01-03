@@ -1,16 +1,22 @@
 ## blockchain-developer-bootcamp-final-project: 
 # Musical instruments rental
 
+### Brief introduction
 While many people have a dusty guitar, saxophone, or other instruments lying around in their homes, others would like to rent these very same instruments for a while - maybe to refresh their skills, to get a simple idea if they like the instrument at all... or simply as a different way to use their time for a while. The musical instruments rental service is ideal for that. ;-)
 
 ### Deployed with Github Pages:
 https://schultzl.github.io/blockchain-developer-bootcamp-final-project/
 
 ### Screencast link:
-( TO DO )
+https://www.loom.com/share/78730d59c2bf4289ac28ac9e3f09dd0a
 
 ### Public Ethereum account for certification:
 0x27072aEa00D4df1c451033F27B886A4C32f181Fa
+
+
+-----
+
+## General infromation:
 
 ### Recommendations/Prerequisites
 - Node.js (v16.13.0)
@@ -36,8 +42,6 @@ Note:
 - To migrate to local testnet: truffe migrate
 - To run tests: truffle test
 
------
-
 - To migrate to a public testnet (e.g. rinkeby): truffe migrate --network <testnet_name>
 
 
@@ -52,7 +56,9 @@ Alternatively, you can deploy it locally (to dev). In this case, the contract ad
 - In VS code, right-click on the index.html file --> "Open with Live Server"
 
 
-### Current workflow:
+-----
+
+## Current workflow:
 
 1. Instrument owners have to upload information about the instrument(s) they want to make available for rent
 2. Leasers enter the website and register with Metamask
@@ -62,6 +68,18 @@ Alternatively, you can deploy it locally (to dev). In this case, the contract ad
 6. The contract becomes valid for the agreed period of time after the transaction has been approved
 7. The instrument is sent to the leaser 
 8. The leaser returns the instrument to the owner after use
+
+
+### Example on how to interact with the contract locally
+- truffle migrate
+- truffle console
+- let instance = await InstrumentRental.deployed()
+- Use functions, e.g.
+    ... to add an instrument:
+    instance.addInstrument("flute", "XXXXX", "https://pictureofaflute.jpg", web3.utils.toWei('0.003'), 3, 100)
+
+    ... to fetch an instrument that has been added to the contract
+    instance.fetchItem(0)
 
 
 ### Not implemented (yet), but actually important:
