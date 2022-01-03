@@ -36,7 +36,7 @@ Tipp: Run `yarn install` in the root of the project directory to install depende
 ### Compile and test the contract (locally):
 Note: 
 1. You should be in the root of the project directory to run the commands listed below
-2. Remember to start ganache (`ganache-cli` in a different terminal window) in order to run the commands "truffle migrate" (local testnet) and "truffle test"
+2. Remember to start ganache (should run on port 8545; command `ganache-cli`), and open a different terminal window in order to run the commands "truffle migrate" (local testnet) and "truffle test" as listed below.
 
 - To compile: truffle compile
 - To migrate to local testnet: truffe migrate
